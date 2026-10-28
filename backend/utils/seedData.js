@@ -1,0 +1,1274 @@
+module.exports = {
+  users: [
+    {
+      _id: "usr_admin",
+      name: "Admin",
+      email: "admin@tarqdev.com",
+      role: "Admin",
+      department: "System Administration",
+      title: "Enterprise System Administrator",
+      avatar: null,
+      activeWorkload: 4
+    },
+    {
+      _id: "usr_manager",
+      name: "Manager",
+      email: "manager@tarqdev.com",
+      role: "Manager",
+      department: "Service Desk Operations",
+      title: "Service Operations Manager",
+      avatar: null,
+      activeWorkload: 5,
+      onHoldCount: 2
+    },
+    {
+      _id: "usr_employee",
+      name: "Employee",
+      email: "employee@tarqdev.com",
+      role: "Employee",
+      department: "Technical Support",
+      title: "Senior Support Specialist",
+      avatar: null,
+      activeWorkload: 6,
+      onHoldCount: 1
+    },
+    {
+      _id: "usr_devops",
+      name: "DevOps Engineer",
+      email: "devops@tarqdev.com",
+      role: "Employee",
+      department: "IT Infrastructure",
+      title: "Cloud Infrastructure Lead",
+      avatar: null,
+      activeWorkload: 4,
+      onHoldCount: 1
+    },
+    {
+      _id: "usr_security",
+      name: "Security Analyst",
+      email: "security@tarqdev.com",
+      role: "Employee",
+      department: "Network Security",
+      title: "Information Security Analyst",
+      avatar: null,
+      activeWorkload: 3,
+      onHoldCount: 0
+    },
+    {
+      _id: "usr_dba",
+      name: "Database Administrator",
+      email: "dba@tarqdev.com",
+      role: "Employee",
+      department: "Database Admin",
+      title: "Database Reliability Engineer",
+      avatar: null,
+      activeWorkload: 3,
+      onHoldCount: 1
+    }
+  ],
+  departments: [
+    { _id: "dep_1", name: "IT Infrastructure", code: "INFRA", manager: "DevOps Engineer" },
+    { _id: "dep_2", name: "Network Security", code: "SEC", manager: "Security Analyst" },
+    { _id: "dep_3", name: "Database Admin", code: "DBA", manager: "Database Administrator" },
+    { _id: "dep_4", name: "Software Support", code: "SW", manager: "Admin" },
+    { _id: "dep_5", name: "HR Services", code: "HR", manager: "Manager" },
+    { _id: "dep_6", name: "Facilities", code: "OPS", manager: "Manager" },
+    { _id: "dep_7", name: "Hardware Failure", code: "HW", manager: "Employee" }
+  ],
+  categories: [
+    "IT Infrastructure",
+    "Network Security",
+    "Database Admin",
+    "Software Support",
+    "Hardware Failure",
+    "HR Services",
+    "Facilities"
+  ],
+  requests: [
+    {
+      _id: "req_1042",
+      ticketId: "REQ-2026-1042",
+      title: "AWS RDS PostgreSQL Production Instance Storage Auto-Expansion & IOPS Alert",
+      description: "Automated CloudWatch alert [CW-DB-IOPS-082]: Production RDS PostgreSQL cluster 'db-prd-core-01' storage utilization reached 88.4% (allocated: 1000 GB, available: 116 GB). Provisioned IOPS burst latency increased to 18ms. Immediate storage volume increase to 1500 GB and gp3 baseline adjustment required to avoid transaction freeze.",
+      category: "Database Admin",
+      priority: "Critical",
+      status: "In Progress",
+      requestedBy: {
+        _id: "usr_devops",
+        name: "DevOps Engineer",
+        email: "devops@tarqdev.com",
+        role: "Employee"
+      },
+      assignedTo: {
+        _id: "usr_dba",
+        name: "Database Administrator",
+        email: "dba@tarqdev.com",
+        role: "Employee",
+        title: "Database Reliability Engineer"
+      },
+      department: "Database Admin",
+      sla: "4 Hours",
+      aiSummary: "High-severity database capacity incident. RDS primary cluster at 88.4% capacity with elevated IOPS latency. Storage allocation bump to 1500 GB gp3 recommended immediately.",
+      comments: [
+        {
+          id: "comm_1042_1",
+          author: { name: "Database Administrator", role: "Employee" },
+          text: "Initiated online volume modification via AWS CLI. Storage scaling in progress without downtime. Monitoring replica sync lag.",
+          isInternal: true,
+          createdAt: "2026-10-28T14:15:00.000Z"
+        },
+        {
+          id: "comm_1042_2",
+          author: { name: "Manager", role: "Manager" },
+          text: "Approved change ticket. Keep core operations informed if replica lag exceeds 30 seconds.",
+          isInternal: false,
+          createdAt: "2026-10-28T14:22:00.000Z"
+        }
+      ],
+      history: [
+        {
+          id: "h_1042_1",
+          timestamp: "02:05 pm",
+          action: "TICKET_CREATED",
+          details: "Automated alert received from CloudWatch: RDS storage capacity threshold exceeded",
+          user: "DevOps Engineer"
+        },
+        {
+          id: "h_1042_2",
+          timestamp: "02:10 pm",
+          action: "AI_CLASSIFIED",
+          details: "TarqAI heuristics identified Critical priority and Database Admin domain",
+          user: "TarqAI Engine"
+        },
+        {
+          id: "h_1042_3",
+          timestamp: "02:12 pm",
+          action: "ASSIGNED",
+          details: "Assigned to Database Administrator",
+          user: "Manager"
+        },
+        {
+          id: "h_1042_4",
+          timestamp: "02:14 pm",
+          action: "STATUS_CHANGE",
+          details: "Status changed from Open to In Progress",
+          user: "Database Administrator"
+        }
+      ],
+      createdAt: "2026-10-28T14:05:00.000Z",
+      updatedAt: "2026-10-28T14:22:00.000Z"
+    },
+    {
+      _id: "req_1088",
+      ticketId: "REQ-2026-1088",
+      title: "Kubernetes Production Ingress Wildcard Certificate Renewal (*.tarqdev.com)",
+      description: "DigiCert Wildcard SSL/TLS certificate for *.tarqdev.com expires in 72 hours. Cert-manager Let's Encrypt fallback failed validation on DNS-01 challenge due to Cloudflare API rate limit. Manual certificate installation needed on k8s ingress secrets across 3 regional clusters.",
+      category: "Network Security",
+      priority: "High",
+      status: "Open",
+      requestedBy: {
+        _id: "usr_employee",
+        name: "Employee",
+        email: "employee@tarqdev.com",
+        role: "Employee"
+      },
+      assignedTo: {
+        _id: "usr_security",
+        name: "Security Analyst",
+        email: "security@tarqdev.com",
+        role: "Employee",
+        title: "Information Security Analyst"
+      },
+      department: "Network Security",
+      sla: "12 Hours",
+      aiSummary: "Security certificate renewal action needed within 72 hours to prevent user-facing HTTPS browser warnings across all production subdomains.",
+      comments: [
+        {
+          id: "comm_1088_1",
+          author: { name: "Security Analyst", role: "Employee" },
+          text: "Generated new CSR and requested reissue from corporate DigiCert portal. Will update Kubernetes secrets via Terraform.",
+          isInternal: true,
+          createdAt: "2026-10-28T11:30:00.000Z"
+        }
+      ],
+      history: [
+        {
+          id: "h_1088_1",
+          timestamp: "11:15 am",
+          action: "TICKET_CREATED",
+          details: "Service request submitted for SSL certificate renewal",
+          user: "Employee"
+        },
+        {
+          id: "h_1088_2",
+          timestamp: "11:20 am",
+          action: "ASSIGNED",
+          details: "Assigned to Security Analyst",
+          user: "Admin"
+        }
+      ],
+      createdAt: "2026-10-28T11:15:00.000Z",
+      updatedAt: "2026-10-28T11:30:00.000Z"
+    },
+    {
+      _id: "req_1120",
+      ticketId: "REQ-2026-1120",
+      title: "APAC Regional Office IPsec VPN Tunnel Intermittent Gateway Dropout",
+      description: "Users in Singapore and Tokyo offices reporting random VPN disconnects every 45-60 minutes on gateway 'vpn-sg-01.tarqdev.com'. Cisco ASA logs show DPD (Dead Peer Detection) handshake failure on phase 2 rekeying with ISP upstream router.",
+      category: "IT Infrastructure",
+      priority: "High",
+      status: "In Progress",
+      requestedBy: {
+        _id: "usr_manager",
+        name: "Manager",
+        email: "manager@tarqdev.com",
+        role: "Manager"
+      },
+      assignedTo: {
+        _id: "usr_devops",
+        name: "DevOps Engineer",
+        email: "devops@tarqdev.com",
+        role: "Employee",
+        title: "Cloud Infrastructure Lead"
+      },
+      department: "IT Infrastructure",
+      sla: "12 Hours",
+      aiSummary: "Network connectivity instability affecting APAC workforce. Phase 2 IPsec tunnel lifetime negotiation mismatch suspected. Adjust IKEv2 lifetime parameter.",
+      comments: [
+        {
+          id: "comm_1120_1",
+          author: { name: "DevOps Engineer", role: "Employee" },
+          text: "Identified MTU clamping issue on peer router. Adjusted MSS to 1360 bytes and re-negotiated tunnel. Running 2-hour ping test.",
+          isInternal: true,
+          createdAt: "2026-10-28T09:45:00.000Z"
+        }
+      ],
+      history: [
+        {
+          id: "h_1120_1",
+          timestamp: "08:45 am",
+          action: "TICKET_CREATED",
+          details: "Service request submitted for APAC VPN dropouts",
+          user: "Manager"
+        },
+        {
+          id: "h_1120_2",
+          timestamp: "09:00 am",
+          action: "STATUS_CHANGE",
+          details: "Status marked as In Progress",
+          user: "DevOps Engineer"
+        }
+      ],
+      createdAt: "2026-10-28T08:45:00.000Z",
+      updatedAt: "2026-10-28T09:45:00.000Z"
+    },
+    {
+      _id: "req_1154",
+      ticketId: "REQ-2026-1154",
+      title: "SOC 2 Type II Quarterly Access Control & Privileged IAM Role Review",
+      description: "Quarterly compliance requirement: export AWS IAM, GitHub Enterprise, and Okta SSO administrator logs for Q3-Q4 2026. Review all dormant accounts (>60 days inactive) and revoke elevated root access per policy SEC-POL-04.",
+      category: "Network Security",
+      priority: "Medium",
+      status: "Open",
+      requestedBy: {
+        _id: "usr_admin",
+        name: "Admin",
+        email: "admin@tarqdev.com",
+        role: "Admin"
+      },
+      assignedTo: {
+        _id: "usr_security",
+        name: "Security Analyst",
+        email: "security@tarqdev.com",
+        role: "Employee",
+        title: "Information Security Analyst"
+      },
+      department: "Network Security",
+      sla: "24 Hours",
+      aiSummary: "Mandatory compliance review. Requires account audit, access log consolidation, and de-provisioning of dormant admin roles.",
+      comments: [],
+      history: [
+        {
+          id: "h_1154_1",
+          timestamp: "Yesterday 04:30 pm",
+          action: "TICKET_CREATED",
+          details: "Quarterly SOC 2 access control review ticket opened",
+          user: "Admin"
+        }
+      ],
+      createdAt: "2026-10-27T16:30:00.000Z",
+      updatedAt: "2026-10-27T16:30:00.000Z"
+    },
+    {
+      _id: "req_1192",
+      ticketId: "REQ-2026-1192",
+      title: "GitLab CI/CD Runner Farm Docker Cache Disk Saturation",
+      description: "Build pipelines blocked with error 'no space left on device: /var/lib/docker/overlay2'. The runner instances accumulated 420 GB of unpruned multi-stage Docker build cache. Pipelines queue length exceeded 40 jobs.",
+      category: "Software Support",
+      priority: "High",
+      status: "Resolved",
+      requestedBy: {
+        _id: "usr_employee",
+        name: "Employee",
+        email: "employee@tarqdev.com",
+        role: "Employee"
+      },
+      assignedTo: {
+        _id: "usr_devops",
+        name: "DevOps Engineer",
+        email: "devops@tarqdev.com",
+        role: "Employee",
+        title: "Cloud Infrastructure Lead"
+      },
+      department: "Software Support",
+      sla: "12 Hours",
+      aiSummary: "CI/CD build pipeline blockage caused by Docker cache exhaustion. Automated cron cleanup script installed and builds restored.",
+      comments: [
+        {
+          id: "comm_1192_1",
+          author: { name: "DevOps Engineer", role: "Employee" },
+          text: "Executed docker system prune -af --volumes. Reclaimed 380 GB of SSD space. Added automated nightly pruning systemd timer.",
+          isInternal: false,
+          createdAt: "2026-10-27T18:25:00.000Z"
+        }
+      ],
+      history: [
+        {
+          id: "h_1192_1",
+          timestamp: "Yesterday 03:00 pm",
+          action: "TICKET_CREATED",
+          details: "Pipeline failure alert opened",
+          user: "Employee"
+        },
+        {
+          id: "h_1192_2",
+          timestamp: "Yesterday 06:30 pm",
+          action: "STATUS_CHANGE",
+          details: "Status marked as Resolved after verification",
+          user: "DevOps Engineer"
+        }
+      ],
+      createdAt: "2026-10-27T15:00:00.000Z",
+      updatedAt: "2026-10-27T18:30:00.000Z"
+    },
+    {
+      _id: "req_1215",
+      ticketId: "REQ-2026-1215",
+      title: "Workstation Provisioning: MacBook Pro M3 Max (64GB RAM) for Senior AI Engineer",
+      description: "Hardware procurement ticket for new Senior LLM Engineer joining next Monday. Specifications: 16-inch M3 Max (16-core CPU, 40-core GPU), 64GB Unified Memory, 1TB SSD, MDM pre-enrolled with Jamf Pro and enterprise security agent.",
+      category: "Hardware Failure",
+      priority: "Medium",
+      status: "In Progress",
+      requestedBy: {
+        _id: "usr_manager",
+        name: "Manager",
+        email: "manager@tarqdev.com",
+        role: "Manager"
+      },
+      assignedTo: {
+        _id: "usr_employee",
+        name: "Employee",
+        email: "employee@tarqdev.com",
+        role: "Employee",
+        title: "Senior Support Specialist"
+      },
+      department: "Hardware Failure",
+      sla: "24 Hours",
+      aiSummary: "Asset provisioning request for engineering onboarding. Device received, Jamf profile deploying, awaiting dock delivery.",
+      comments: [
+        {
+          id: "comm_1215_1",
+          author: { name: "Employee", role: "Employee" },
+          text: "Laptop unboxed and imaged with corporate macOS Sonoma image. MDM enrollment confirmed with zero-trust posture.",
+          isInternal: true,
+          createdAt: "2026-10-28T10:15:00.000Z"
+        }
+      ],
+      history: [
+        {
+          id: "h_1215_1",
+          timestamp: "09:30 am",
+          action: "TICKET_CREATED",
+          details: "New workstation order created",
+          user: "Manager"
+        },
+        {
+          id: "h_1215_2",
+          timestamp: "10:00 am",
+          action: "STATUS_CHANGE",
+          details: "Status changed to In Progress",
+          user: "Employee"
+        }
+      ],
+      createdAt: "2026-10-28T09:30:00.000Z",
+      updatedAt: "2026-10-28T10:15:00.000Z"
+    },
+    {
+      _id: "req_1240",
+      ticketId: "REQ-2026-1240",
+      title: "Production Hotfix Deployment Rollback Automation Failure (v2.14.3)",
+      description: "During 02:00 AM release, microservice 'auth-service' failed health check probes after DB migration step. Rollback pipeline timed out due to lock contention on table 'oauth_sessions'. Manual rollback executed and schema lock released.",
+      category: "Software Support",
+      priority: "Critical",
+      status: "Resolved",
+      requestedBy: {
+        _id: "usr_devops",
+        name: "DevOps Engineer",
+        email: "devops@tarqdev.com",
+        role: "Employee"
+      },
+      assignedTo: {
+        _id: "usr_admin",
+        name: "Admin",
+        email: "admin@tarqdev.com",
+        role: "Admin",
+        title: "Enterprise System Administrator"
+      },
+      department: "Software Support",
+      sla: "4 Hours",
+      aiSummary: "Critical release deployment incident. Database table lock cleared, previous stable image v2.14.2 restored, traffic normal.",
+      comments: [
+        {
+          id: "comm_1240_1",
+          author: { name: "Admin", role: "Admin" },
+          text: "Root cause: unindexed foreign key in migration script caused table-level exclusive lock. Hotfix patch prepared for staging test.",
+          isInternal: false,
+          createdAt: "2026-10-28T03:10:00.000Z"
+        }
+      ],
+      history: [
+        {
+          id: "h_1240_1",
+          timestamp: "02:15 am",
+          action: "TICKET_CREATED",
+          details: "Critical deployment failure alert opened",
+          user: "DevOps Engineer"
+        },
+        {
+          id: "h_1240_2",
+          timestamp: "03:15 am",
+          action: "STATUS_CHANGE",
+          details: "Status changed to Resolved",
+          user: "Admin"
+        }
+      ],
+      createdAt: "2026-10-28T02:15:00.000Z",
+      updatedAt: "2026-10-28T03:15:00.000Z"
+    },
+    {
+      _id: "req_1275",
+      ticketId: "REQ-2026-1275",
+      title: "Elasticsearch Cluster Yellow Status: Unassigned Shards on Logstash Index",
+      description: "Elasticsearch production logging cluster in Yellow state. Shard allocation retry limit exceeded on index 'logstash-2026.10.26' following node restart. Primary shards active, 3 replica shards unassigned due to disk watermark threshold.",
+      category: "Database Admin",
+      priority: "Medium",
+      status: "On Hold",
+      requestedBy: {
+        _id: "usr_employee",
+        name: "Employee",
+        email: "employee@tarqdev.com",
+        role: "Employee"
+      },
+      assignedTo: {
+        _id: "usr_dba",
+        name: "Database Administrator",
+        email: "dba@tarqdev.com",
+        role: "Employee",
+        title: "Database Reliability Engineer"
+      },
+      department: "Database Admin",
+      sla: "24 Hours",
+      aiSummary: "Logging cluster health degraded. Unassigned replica shards due to high disk watermark (85%). Shard allocation suspended pending EBS resize.",
+      comments: [
+        {
+          id: "comm_1275_1",
+          author: { name: "Database Administrator", role: "Employee" },
+          text: "Holding shard re-route until storage volume resize finishes on data node 03 tonight at 11 PM.",
+          isInternal: true,
+          createdAt: "2026-10-27T17:00:00.000Z"
+        }
+      ],
+      history: [
+        {
+          id: "h_1275_1",
+          timestamp: "Yesterday 02:00 pm",
+          action: "TICKET_CREATED",
+          details: "Elasticsearch cluster yellow alert",
+          user: "Employee"
+        },
+        {
+          id: "h_1275_2",
+          timestamp: "Yesterday 05:00 pm",
+          action: "STATUS_CHANGE",
+          details: "Status marked as On Hold pending disk expansion",
+          user: "Database Administrator"
+        }
+      ],
+      createdAt: "2026-10-27T14:00:00.000Z",
+      updatedAt: "2026-10-27T17:00:00.000Z"
+    },
+    {
+      _id: "req_1302",
+      ticketId: "REQ-2026-1302",
+      title: "Boardroom 402 Crestron AV & Zoom Rooms Touch Controller Black Screen",
+      description: "Touch panel controller in 4th Floor Executive Boardroom is stuck on bootloop showing 'Crestron OS Error 104'. Executive committee meeting scheduled for 3:00 PM requires Zoom Room functionality.",
+      category: "Facilities",
+      priority: "High",
+      status: "Resolved",
+      requestedBy: {
+        _id: "usr_manager",
+        name: "Manager",
+        email: "manager@tarqdev.com",
+        role: "Manager"
+      },
+      assignedTo: {
+        _id: "usr_employee",
+        name: "Employee",
+        email: "employee@tarqdev.com",
+        role: "Employee",
+        title: "Senior Support Specialist"
+      },
+      department: "Facilities",
+      sla: "12 Hours",
+      aiSummary: "Facilities hardware failure in Boardroom 402. Firmware re-flashed over PoE LAN port and system verified operational.",
+      comments: [
+        {
+          id: "comm_1302_1",
+          author: { name: "Employee", role: "Employee" },
+          text: "Power cycled PoE switch port and flashed latest Crestron firmware v3.2.1. Verified Zoom Rooms meeting audio and video test.",
+          isInternal: false,
+          createdAt: "2026-10-28T11:40:00.000Z"
+        }
+      ],
+      history: [
+        {
+          id: "h_1302_1",
+          timestamp: "10:30 am",
+          action: "TICKET_CREATED",
+          details: "AV panel issue submitted",
+          user: "Manager"
+        },
+        {
+          id: "h_1302_2",
+          timestamp: "11:45 am",
+          action: "STATUS_CHANGE",
+          details: "Status marked as Resolved",
+          user: "Employee"
+        }
+      ],
+      createdAt: "2026-10-28T10:30:00.000Z",
+      updatedAt: "2026-10-28T11:45:00.000Z"
+    },
+    {
+      _id: "req_1333",
+      ticketId: "REQ-2026-1333",
+      title: "Anomalous SSO MFA Fatigue Challenge Bursts Detected on Gateway",
+      description: "WAF alert triggered: 28 consecutive push notifications sent within 4 minutes to user account 'finance-director@tarqdev.com' from IP address 185.220.101.44 (TOR exit node). Account automatically locked by Okta threat engine.",
+      category: "Network Security",
+      priority: "Critical",
+      status: "Resolved",
+      requestedBy: {
+        _id: "usr_security",
+        name: "Security Analyst",
+        email: "security@tarqdev.com",
+        role: "Employee"
+      },
+      assignedTo: {
+        _id: "usr_security",
+        name: "Security Analyst",
+        email: "security@tarqdev.com",
+        role: "Employee",
+        title: "Information Security Analyst"
+      },
+      department: "Network Security",
+      sla: "4 Hours",
+      aiSummary: "Security defense incident: MFA prompt bombardment detected and blocked. Attendant IP blacklisted, credentials rotated, user confirmed safe.",
+      comments: [
+        {
+          id: "comm_1333_1",
+          author: { name: "Security Analyst", role: "Employee" },
+          text: "Contacted user via out-of-band phone call. Verified no unauthorized access occurred. Enforced FIDO2 hardware security key for account.",
+          isInternal: true,
+          createdAt: "2026-10-27T22:05:00.000Z"
+        }
+      ],
+      history: [
+        {
+          id: "h_1333_1",
+          timestamp: "Yesterday 09:30 pm",
+          action: "TICKET_CREATED",
+          details: "Security threat event ingested from SIEM",
+          user: "Security Analyst"
+        },
+        {
+          id: "h_1333_2",
+          timestamp: "Yesterday 10:10 pm",
+          action: "STATUS_CHANGE",
+          details: "Status marked as Resolved after threat containment",
+          user: "Security Analyst"
+        }
+      ],
+      createdAt: "2026-10-27T21:30:00.000Z",
+      updatedAt: "2026-10-27T22:10:00.000Z"
+    },
+    {
+      _id: "req_1367",
+      ticketId: "REQ-2026-1367",
+      title: "Corporate Wi-Fi 6 WPA3 Enterprise Certificate Re-enrollment",
+      description: "Root CA certificate on FreeRADIUS AAA server renewed last night. Mobile devices and non-domain laptops receiving untrusted certificate alert when connecting to SSID 'Tarqdev-Corp-Secure'. Group Policy push required.",
+      category: "IT Infrastructure",
+      priority: "Medium",
+      status: "Open",
+      requestedBy: {
+        _id: "usr_employee",
+        name: "Employee",
+        email: "employee@tarqdev.com",
+        role: "Employee"
+      },
+      assignedTo: {
+        _id: "usr_devops",
+        name: "DevOps Engineer",
+        email: "devops@tarqdev.com",
+        role: "Employee",
+        title: "Cloud Infrastructure Lead"
+      },
+      department: "IT Infrastructure",
+      sla: "24 Hours",
+      aiSummary: "Internal corporate Wi-Fi authentication certificate update. GPO distribution required for domain endpoints; manual profile update guide for mobile.",
+      comments: [],
+      history: [
+        {
+          id: "h_1367_1",
+          timestamp: "01:10 pm",
+          action: "TICKET_CREATED",
+          details: "Corporate Wi-Fi certificate re-enrollment ticket created",
+          user: "Employee"
+        }
+      ],
+      createdAt: "2026-10-28T13:10:00.000Z",
+      updatedAt: "2026-10-28T13:10:00.000Z"
+    },
+    {
+      _id: "req_1401",
+      ticketId: "REQ-2026-1401",
+      title: "New Hire Onboarding: Role-Based System Entitlements for 6 Engineers",
+      description: "Provision standard developer access packages for batch of 6 software engineering hires starting Nov 1. Entitlements include: Google Workspace Enterprise, GitHub Tarqdev Org, AWS Staging sandbox, Slack workspace, and 1Password vault.",
+      category: "HR Services",
+      priority: "High",
+      status: "In Progress",
+      requestedBy: {
+        _id: "usr_manager",
+        name: "Manager",
+        email: "manager@tarqdev.com",
+        role: "Manager"
+      },
+      assignedTo: {
+        _id: "usr_employee",
+        name: "Employee",
+        email: "employee@tarqdev.com",
+        role: "Employee",
+        title: "Senior Support Specialist"
+      },
+      department: "HR Services",
+      sla: "12 Hours",
+      aiSummary: "HR Onboarding batch provisioning for 6 engineers. Identity profiles created in Okta, SCIM group provisioning sync in progress.",
+      comments: [
+        {
+          id: "comm_1401_1",
+          author: { name: "Employee", role: "Employee" },
+          text: "Okta accounts generated and invitations sent to personal recovery emails. AWS IAM Identity Center access groups assigned.",
+          isInternal: false,
+          createdAt: "2026-10-28T12:00:00.000Z"
+        }
+      ],
+      history: [
+        {
+          id: "h_1401_1",
+          timestamp: "10:00 am",
+          action: "TICKET_CREATED",
+          details: "Onboarding access ticket created",
+          user: "Manager"
+        },
+        {
+          id: "h_1401_2",
+          timestamp: "10:45 am",
+          action: "STATUS_CHANGE",
+          details: "Status marked as In Progress",
+          user: "Employee"
+        }
+      ],
+      createdAt: "2026-10-28T10:00:00.000Z",
+      updatedAt: "2026-10-28T12:00:00.000Z"
+    },
+    {
+      _id: "req_1445",
+      ticketId: "REQ-2026-1445",
+      title: "Datacenter Row 3 APC In-Row Cooling Unit Chilled Water Valve Alarm",
+      description: "BMS environmental monitor alerted cold aisle temperature in Row 3 spiked from 21°C to 27.5°C. Cooling unit CRAC-03 reported valve actuator position error. Secondary unit engaged automatically.",
+      category: "Facilities",
+      priority: "Critical",
+      status: "Closed",
+      requestedBy: {
+        _id: "usr_admin",
+        name: "Admin",
+        email: "admin@tarqdev.com",
+        role: "Admin"
+      },
+      assignedTo: {
+        _id: "usr_employee",
+        name: "Employee",
+        email: "employee@tarqdev.com",
+        role: "Employee",
+        title: "Senior Support Specialist"
+      },
+      department: "Facilities",
+      sla: "4 Hours",
+      aiSummary: "Datacenter environmental emergency. Actuator sensor replaced by HVAC contractor, thermal gradient restored to 20.8°C nominal.",
+      comments: [
+        {
+          id: "comm_1445_1",
+          author: { name: "Employee", role: "Employee" },
+          text: "Facilities technician replaced motorized valve. Temp verified at 20.5°C across all 14 server racks.",
+          isInternal: false,
+          createdAt: "2026-10-26T16:15:00.000Z"
+        }
+      ],
+      history: [
+        {
+          id: "h_1445_1",
+          timestamp: "Oct 26, 01:20 pm",
+          action: "TICKET_CREATED",
+          details: "BMS thermal alert ingested",
+          user: "Admin"
+        },
+        {
+          id: "h_1445_2",
+          timestamp: "Oct 26, 04:20 pm",
+          action: "STATUS_CHANGE",
+          details: "Status marked as Closed after inspection",
+          user: "Employee"
+        }
+      ],
+      createdAt: "2026-10-26T13:20:00.000Z",
+      updatedAt: "2026-10-26T16:20:00.000Z"
+    },
+    {
+      _id: "req_1478",
+      ticketId: "REQ-2026-1478",
+      title: "Emergency Offboarding & Immediate Identity Deprovisioning (Contractor)",
+      description: "Immediate termination of external security contractor contract. Revoke VPN access, terminate active OAuth sessions, rotate API secrets, and disable GitHub repository read access across all org repositories.",
+      category: "HR Services",
+      priority: "Critical",
+      status: "Resolved",
+      requestedBy: {
+        _id: "usr_manager",
+        name: "Manager",
+        email: "manager@tarqdev.com",
+        role: "Manager"
+      },
+      assignedTo: {
+        _id: "usr_admin",
+        name: "Admin",
+        email: "admin@tarqdev.com",
+        role: "Admin",
+        title: "Enterprise System Administrator"
+      },
+      department: "HR Services",
+      sla: "4 Hours",
+      aiSummary: "Security offboarding workflow completed. 14 identity providers and secret tokens revoked in accordance with standard offboarding checklist.",
+      comments: [
+        {
+          id: "comm_1478_1",
+          author: { name: "Admin", role: "Admin" },
+          text: "Automated offboarding script triggered. All active SSO sessions revoked and VPN profile deleted. Evidence log archived.",
+          isInternal: true,
+          createdAt: "2026-10-28T09:25:00.000Z"
+        }
+      ],
+      history: [
+        {
+          id: "h_1478_1",
+          timestamp: "08:15 am",
+          action: "TICKET_CREATED",
+          details: "Urgent offboarding request received",
+          user: "Manager"
+        },
+        {
+          id: "h_1478_2",
+          timestamp: "09:30 am",
+          action: "STATUS_CHANGE",
+          details: "Status marked as Resolved",
+          user: "Admin"
+        }
+      ],
+      createdAt: "2026-10-28T08:15:00.000Z",
+      updatedAt: "2026-10-28T09:30:00.000Z"
+    },
+    {
+      _id: "req_1510",
+      ticketId: "REQ-2026-1510",
+      title: "Kafka Consumer Lag Spike in Notification Event Streaming Pipeline",
+      description: "Event processing consumer group 'email-notification-workers' accumulated lag of 82,000 records. Dead letter queue processing slowed due to SendGrid upstream API rate limiting (HTTP 429). Batch throttling config needed.",
+      category: "Software Support",
+      priority: "Critical",
+      status: "Open",
+      requestedBy: {
+        _id: "usr_devops",
+        name: "DevOps Engineer",
+        email: "devops@tarqdev.com",
+        role: "Employee"
+      },
+      assignedTo: {
+        _id: "usr_devops",
+        name: "DevOps Engineer",
+        email: "devops@tarqdev.com",
+        role: "Employee",
+        title: "Cloud Infrastructure Lead"
+      },
+      department: "Software Support",
+      sla: "4 Hours",
+      aiSummary: "High-priority queue backlog incident. 82k pending messages in Kafka topic 'user-notifications'. Exponential backoff and concurrency scaling needed.",
+      comments: [],
+      history: [
+        {
+          id: "h_1510_1",
+          timestamp: "01:45 pm",
+          action: "TICKET_CREATED",
+          details: "Kafka streaming consumer lag alert",
+          user: "DevOps Engineer"
+        }
+      ],
+      createdAt: "2026-10-28T13:45:00.000Z",
+      updatedAt: "2026-10-28T13:45:00.000Z"
+    },
+    {
+      _id: "req_1544",
+      ticketId: "REQ-2026-1544",
+      title: "S3 Glacier Deep Archive Lifecycle Rule Audit & Cost Optimization",
+      description: "Audit historical backup buckets 'tarq-db-snapshots-archive' and apply transition rule: move raw dumps older than 90 days to Glacier Deep Archive and purge multipart aborts. Projected monthly savings: $420.",
+      category: "IT Infrastructure",
+      priority: "Low",
+      status: "Closed",
+      requestedBy: {
+        _id: "usr_admin",
+        name: "Admin",
+        email: "admin@tarqdev.com",
+        role: "Admin"
+      },
+      assignedTo: {
+        _id: "usr_devops",
+        name: "DevOps Engineer",
+        email: "devops@tarqdev.com",
+        role: "Employee",
+        title: "Cloud Infrastructure Lead"
+      },
+      department: "IT Infrastructure",
+      sla: "48 Hours",
+      aiSummary: "Cloud cost optimization completed. Lifecycle rule validated via CloudFormation template and applied to 4 archive buckets.",
+      comments: [],
+      history: [
+        {
+          id: "h_1544_1",
+          timestamp: "Oct 25, 10:00 am",
+          action: "TICKET_CREATED",
+          details: "S3 lifecycle optimization ticket submitted",
+          user: "Admin"
+        },
+        {
+          id: "h_1544_2",
+          timestamp: "Oct 25, 02:00 pm",
+          action: "STATUS_CHANGE",
+          details: "Status marked as Closed",
+          user: "DevOps Engineer"
+        }
+      ],
+      createdAt: "2026-10-25T10:00:00.000Z",
+      updatedAt: "2026-10-25T14:00:00.000Z"
+    },
+    {
+      _id: "req_1580",
+      ticketId: "REQ-2026-1580",
+      title: "PostgreSQL Deadlock on Billing Batch Settlement Table",
+      description: "Automated alert from pgbadger: 14 deadlock transactions detected between concurrent batch settlement script and real-time checkout process on row locks for table 'billing_invoices'. Query plan optimization required.",
+      category: "Database Admin",
+      priority: "High",
+      status: "Resolved",
+      requestedBy: {
+        _id: "usr_employee",
+        name: "Employee",
+        email: "employee@tarqdev.com",
+        role: "Employee"
+      },
+      assignedTo: {
+        _id: "usr_dba",
+        name: "Database Administrator",
+        email: "dba@tarqdev.com",
+        role: "Employee",
+        title: "Database Reliability Engineer"
+      },
+      department: "Database Admin",
+      sla: "12 Hours",
+      aiSummary: "Database concurrency bottleneck resolved. Rewrote batch transaction to acquire locks in sorted order of invoice IDs, zero deadlocks reported since.",
+      comments: [
+        {
+          id: "comm_1580_1",
+          author: { name: "Database Administrator", role: "Employee" },
+          text: "Normalized locking hierarchy in worker script and added advisory lock during reconciliation run.",
+          isInternal: false,
+          createdAt: "2026-10-27T14:35:00.000Z"
+        }
+      ],
+      history: [
+        {
+          id: "h_1580_1",
+          timestamp: "Yesterday 11:30 am",
+          action: "TICKET_CREATED",
+          details: "DB deadlock issue created",
+          user: "Employee"
+        },
+        {
+          id: "h_1580_2",
+          timestamp: "Yesterday 02:40 pm",
+          action: "STATUS_CHANGE",
+          details: "Status marked as Resolved",
+          user: "Database Administrator"
+        }
+      ],
+      createdAt: "2026-10-27T11:30:00.000Z",
+      updatedAt: "2026-10-27T14:40:00.000Z"
+    },
+    {
+      _id: "req_1612",
+      ticketId: "REQ-2026-1612",
+      title: "Deploy CrowdStrike Falcon EDR Agent on Q4 Financial Workstations",
+      description: "Compliance mandate to deploy EDR endpoint protection agent version 7.14 on 24 workstations in Finance and Treasury departments before annual fiscal audit. 18 of 24 installed successfully; 6 requiring manual reboot.",
+      category: "Network Security",
+      priority: "Medium",
+      status: "In Progress",
+      requestedBy: {
+        _id: "usr_security",
+        name: "Security Analyst",
+        email: "security@tarqdev.com",
+        role: "Employee"
+      },
+      assignedTo: {
+        _id: "usr_security",
+        name: "Security Analyst",
+        email: "security@tarqdev.com",
+        role: "Employee",
+        title: "Information Security Analyst"
+      },
+      department: "Network Security",
+      sla: "24 Hours",
+      aiSummary: "Endpoint security deployment 75% complete. Scheduled automated maintenance window tonight at 10 PM for remaining 6 machines.",
+      comments: [
+        {
+          id: "comm_1612_1",
+          author: { name: "Security Analyst", role: "Employee" },
+          text: "Sent user notifications regarding scheduled reboot window tonight at 22:00. Monitoring live console.",
+          isInternal: true,
+          createdAt: "2026-10-28T11:00:00.000Z"
+        }
+      ],
+      history: [
+        {
+          id: "h_1612_1",
+          timestamp: "09:00 am",
+          action: "TICKET_CREATED",
+          details: "EDR deployment campaign ticket created",
+          user: "Security Analyst"
+        },
+        {
+          id: "h_1612_2",
+          timestamp: "09:40 am",
+          action: "STATUS_CHANGE",
+          details: "Status marked as In Progress",
+          user: "Security Analyst"
+        }
+      ],
+      createdAt: "2026-10-28T09:00:00.000Z",
+      updatedAt: "2026-10-28T11:00:00.000Z"
+    },
+    {
+      _id: "req_1645",
+      ticketId: "REQ-2026-1645",
+      title: "Ergonomic Sit-Stand Desk Dual-Monitor Arm Installation (Floor 3)",
+      description: "Workplace ergonomic request: install heavy-duty dual pneumatic monitor arm (VESA 100x100) and cable management spine on workstation 3E-14 for data analytics engineer.",
+      category: "Facilities",
+      priority: "Low",
+      status: "Open",
+      requestedBy: {
+        _id: "usr_employee",
+        name: "Employee",
+        email: "employee@tarqdev.com",
+        role: "Employee"
+      },
+      assignedTo: {
+        _id: "usr_employee",
+        name: "Employee",
+        email: "employee@tarqdev.com",
+        role: "Employee",
+        title: "Senior Support Specialist"
+      },
+      department: "Facilities",
+      sla: "48 Hours",
+      aiSummary: "Workplace facilities ticket. Hardware kit in stock in supply closet B. Scheduled for installation tomorrow morning.",
+      comments: [],
+      history: [
+        {
+          id: "h_1645_1",
+          timestamp: "12:30 pm",
+          action: "TICKET_CREATED",
+          details: "Ergonomic hardware installation requested",
+          user: "Employee"
+        }
+      ],
+      createdAt: "2026-10-28T12:30:00.000Z",
+      updatedAt: "2026-10-28T12:30:00.000Z"
+    },
+    {
+      _id: "req_1690",
+      ticketId: "REQ-2026-1690",
+      title: "Configure Prometheus & Grafana Service Level Objective (SLO) Dashboards",
+      description: "Implement Grafana dashboards for 99.95% availability SLO and error budget burn rate alerts for customer-facing REST API gateways. On hold pending final approval of SLO target thresholds from product team.",
+      category: "Software Support",
+      priority: "Low",
+      status: "On Hold",
+      requestedBy: {
+        _id: "usr_devops",
+        name: "DevOps Engineer",
+        email: "devops@tarqdev.com",
+        role: "Employee"
+      },
+      assignedTo: {
+        _id: "usr_devops",
+        name: "DevOps Engineer",
+        email: "devops@tarqdev.com",
+        role: "Employee",
+        title: "Cloud Infrastructure Lead"
+      },
+      department: "Software Support",
+      sla: "48 Hours",
+      aiSummary: "Observability project on hold awaiting product requirements sign-off on error budget definitions.",
+      comments: [
+        {
+          id: "comm_1690_1",
+          author: { name: "DevOps Engineer", role: "Employee" },
+          text: "Metrics collectors configured in staging. Paused pending product sign-off on error budget alerts.",
+          isInternal: false,
+          createdAt: "2026-10-27T16:00:00.000Z"
+        }
+      ],
+      history: [
+        {
+          id: "h_1690_1",
+          timestamp: "Yesterday 01:00 pm",
+          action: "TICKET_CREATED",
+          details: "SLO dashboard setup ticket created",
+          user: "DevOps Engineer"
+        },
+        {
+          id: "h_1690_2",
+          timestamp: "Yesterday 04:00 pm",
+          action: "STATUS_CHANGE",
+          details: "Status marked as On Hold",
+          user: "DevOps Engineer"
+        }
+      ],
+      createdAt: "2026-10-27T13:00:00.000Z",
+      updatedAt: "2026-10-27T16:00:00.000Z"
+    },
+    {
+      _id: "req_1725",
+      ticketId: "REQ-2026-1725",
+      title: "Asset Decommissioning and DoD 5220.22-M Secure Drive Sanitization",
+      description: "Secure destruction and wipe certification for 8 decommissioned Dell PowerEdge R630 SAS hard drives retired from legacy staging rack. 3-pass DoD 5220.22-M overwrite completed, certificates of destruction filed.",
+      category: "Hardware Failure",
+      priority: "Low",
+      status: "Closed",
+      requestedBy: {
+        _id: "usr_admin",
+        name: "Admin",
+        email: "admin@tarqdev.com",
+        role: "Admin"
+      },
+      assignedTo: {
+        _id: "usr_employee",
+        name: "Employee",
+        email: "employee@tarqdev.com",
+        role: "Employee",
+        title: "Senior Support Specialist"
+      },
+      department: "Hardware Failure",
+      sla: "48 Hours",
+      aiSummary: "Hardware asset lifecycle completed. Cryptographic wipe logs generated and archived in compliance repository.",
+      comments: [],
+      history: [
+        {
+          id: "h_1725_1",
+          timestamp: "Oct 24, 09:00 am",
+          action: "TICKET_CREATED",
+          details: "Hardware sanitization order placed",
+          user: "Admin"
+        },
+        {
+          id: "h_1725_2",
+          timestamp: "Oct 24, 05:15 pm",
+          action: "STATUS_CHANGE",
+          details: "Status marked as Closed with sanitization certs",
+          user: "Employee"
+        }
+      ],
+      createdAt: "2026-10-24T09:00:00.000Z",
+      updatedAt: "2026-10-24T17:15:00.000Z"
+    },
+    {
+      _id: "req_1760",
+      ticketId: "REQ-2026-1760",
+      title: "Staging Redis Sentinel Cluster Failover Verification & Load Testing",
+      description: "Simulate master node loss on 3-node Redis Sentinel cluster in staging environment. Verify that Sentinel promotes replica within 5 seconds and backend microservices reconnect without dropped requests.",
+      category: "IT Infrastructure",
+      priority: "Medium",
+      status: "Resolved",
+      requestedBy: {
+        _id: "usr_employee",
+        name: "Employee",
+        email: "employee@tarqdev.com",
+        role: "Employee"
+      },
+      assignedTo: {
+        _id: "usr_dba",
+        name: "Database Administrator",
+        email: "dba@tarqdev.com",
+        role: "Employee",
+        title: "Database Reliability Engineer"
+      },
+      department: "IT Infrastructure",
+      sla: "24 Hours",
+      aiSummary: "High-availability test verified successfully. Failover completed in 3.2 seconds with zero packet loss on connection pool.",
+      comments: [
+        {
+          id: "comm_1760_1",
+          author: { name: "Database Administrator", role: "Employee" },
+          text: "Sentinel failover verified. Node-02 elected master in 3.14s. App connection pool auto-recovered smoothly.",
+          isInternal: false,
+          createdAt: "2026-10-27T15:50:00.000Z"
+        }
+      ],
+      history: [
+        {
+          id: "h_1760_1",
+          timestamp: "Yesterday 01:00 pm",
+          action: "TICKET_CREATED",
+          details: "Failover test request created",
+          user: "Employee"
+        },
+        {
+          id: "h_1760_2",
+          timestamp: "Yesterday 04:00 pm",
+          action: "STATUS_CHANGE",
+          details: "Status marked as Resolved",
+          user: "Database Administrator"
+        }
+      ],
+      createdAt: "2026-10-27T13:00:00.000Z",
+      updatedAt: "2026-10-27T16:00:00.000Z"
+    },
+    {
+      _id: "req_1800",
+      ticketId: "REQ-2026-1800",
+      title: "Bastion Host SSH Public Key Rotation & OpenSSH Server Upgrade",
+      description: "Rotate administrative authorized_keys on production bastion jumpbox 'bastion-01.tarqdev.com'. Upgrade OpenSSH server package to patch CVE-2024-6387 (regreSSHion vulnerability) and enforce Ed25519 keys only.",
+      category: "Network Security",
+      priority: "Medium",
+      status: "Resolved",
+      requestedBy: {
+        _id: "usr_security",
+        name: "Security Analyst",
+        email: "security@tarqdev.com",
+        role: "Employee"
+      },
+      assignedTo: {
+        _id: "usr_security",
+        name: "Security Analyst",
+        email: "security@tarqdev.com",
+        role: "Employee",
+        title: "Information Security Analyst"
+      },
+      department: "Network Security",
+      sla: "24 Hours",
+      aiSummary: "Security patch and credential rotation completed. Verified Ed25519 authentication for all infrastructure operators.",
+      comments: [],
+      history: [
+        {
+          id: "h_1800_1",
+          timestamp: "Oct 26, 09:30 am",
+          action: "TICKET_CREATED",
+          details: "Security patch advisory ticket submitted",
+          user: "Security Analyst"
+        },
+        {
+          id: "h_1800_2",
+          timestamp: "Oct 26, 12:00 pm",
+          action: "STATUS_CHANGE",
+          details: "Status marked as Resolved after vulnerability rescan",
+          user: "Security Analyst"
+        }
+      ],
+      createdAt: "2026-10-26T09:30:00.000Z",
+      updatedAt: "2026-10-26T12:00:00.000Z"
+    },
+    {
+      _id: "req_1840",
+      ticketId: "REQ-2026-1840",
+      title: "Production CDN Cloudflare Origin Shield Cache Eviction Spike",
+      description: "Cache hit ratio dropped from 94.2% to 61.8% on Cloudflare CDN after marketing asset release. Origin application servers experiencing 3.5x CPU load surge due to missing 'Cache-Control: s-maxage' headers on static asset bundles.",
+      category: "IT Infrastructure",
+      priority: "High",
+      status: "In Progress",
+      requestedBy: {
+        _id: "usr_devops",
+        name: "DevOps Engineer",
+        email: "devops@tarqdev.com",
+        role: "Employee"
+      },
+      assignedTo: {
+        _id: "usr_devops",
+        name: "DevOps Engineer",
+        email: "devops@tarqdev.com",
+        role: "Employee",
+        title: "Cloud Infrastructure Lead"
+      },
+      department: "IT Infrastructure",
+      sla: "12 Hours",
+      aiSummary: "Web performance degradation. Static bundle cache-control headers misconfigured in NGINX ingress. Header rewrite rule deployed to edge.",
+      comments: [
+        {
+          id: "comm_1840_1",
+          author: { name: "DevOps Engineer", role: "Employee" },
+          text: "Deployed Cloudflare Page Rule overriding edge TTL to 14 days. Cache hit ratio climbed back to 91% within 20 minutes.",
+          isInternal: false,
+          createdAt: "2026-10-28T14:40:00.000Z"
+        }
+      ],
+      history: [
+        {
+          id: "h_1840_1",
+          timestamp: "02:20 pm",
+          action: "TICKET_CREATED",
+          details: "CDN cache eviction surge alert",
+          user: "DevOps Engineer"
+        },
+        {
+          id: "h_1840_2",
+          timestamp: "02:35 pm",
+          action: "STATUS_CHANGE",
+          details: "Status marked as In Progress",
+          user: "DevOps Engineer"
+        }
+      ],
+      createdAt: "2026-10-28T14:20:00.000Z",
+      updatedAt: "2026-10-28T14:40:00.000Z"
+    }
+  ]
+};

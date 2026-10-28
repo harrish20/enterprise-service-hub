@@ -1,0 +1,22 @@
+{
+  "name": "enterprise-servicehub",
+  "version": "1.0.0",
+  "description": "Enterprise Service Request Backend Management System - Tarqdev Solutions",
+  "scripts": {
+    "start": "cd backend && node server.js",
+    "backend": "cd backend && node server.js",
+    "frontend": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build"
+  },
+  "keywords": [
+    "mern",
+    "service-request",
+    "enterprise",
+    "tarqdev",
+    "workflow",
+    "analytics"
+  ],
+  "author": "Tarqdev Solutions MERN Stack Intern",
+  "license": "ISC"
+}
+
